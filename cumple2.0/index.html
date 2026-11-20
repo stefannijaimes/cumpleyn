@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lista de regalos de Yanis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="archjs.js"></script>
+</head>
+<body>
+
+  <header class="hero">
+    <h1>Mi cumpleaños, <span class="nombre">Yanis</span></h1>
+    <p class="intro">Gracias por querer celebrar conmigo. Aquí está lo que me haría feliz. Si vas a regalar algo, apártalo para que nadie más lo compre.</p>
+
+    <div class="contador" id="contador" role="timer" aria-label="Tiempo que falta para el cumpleaños">
+      <p class="contador-titulo">Faltan para mi cumpleaños</p>
+      <div class="contador-cajas">
+        <div class="caja"><span id="dias">--</span><small>días</small></div>
+        <div class="caja"><span id="horas">--</span><small>horas</small></div>
+        <div class="caja"><span id="minutos">--</span><small>min</small></div>
+        <div class="caja"><span id="segundos">--</span><small>seg</small></div>
+      </div>
+    </div>
+
+    <div class="progreso" role="group" aria-label="Progreso de regalos reservados">
+      <div class="progreso-texto">
+        <strong id="progresoTexto">0 de 0 regalos reservados</strong>
+        <span id="progresoPct">0%</span>
+      </div>
+      <div class="barra" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="barra">
+        <div class="barra-relleno" id="barraRelleno"></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="filtros" aria-label="Filtros">
+      <div class="filtro">
+        <span class="filtro-titulo">Categoría</span>
+        <div class="chips" id="chipsCategoria"></div>
+      </div>
+      <div class="filtro">
+        <span class="filtro-titulo">Estado</span>
+        <div class="chips" id="chipsEstado">
+          <button class="chip activo" data-estado="todos">Todos</button>
+          <button class="chip" data-estado="disponible">Disponibles</button>
+          <button class="chip" data-estado="reservado">Reservados</button>
+        </div>
+      </div>
+    </section>
+
+    <div id="lista"></div>
+
+    <!-- Experiencias -->
+    <section class="grupo grupo--exp" id="seccionExperiencias">
+      <div class="grupo-cabecera">
+        <h2>Experiencias</h2>
+        <p>Para quienes prefieren regalar un momento.</p>
+      </div>
+
+      <form class="exp-form" id="formExperiencia" autocomplete="off">
+        <div class="exp-campo">
+          <label for="expTipo">Tipo de experiencia</label>
+          <select id="expTipo" required>
+            <option value="">Selecciona una opción…</option>
+            <option value="viaje">✈️ Viaje</option>
+            <option value="actividad">🧘‍♀️ Actividad física</option>
+            <option value="otra">🎁 Otra</option>
+          </select>
+        </div>
+
+        <div class="exp-campo">
+          <label for="expDetalle" id="expDetalleLabel">¿Cuál experiencia?</label>
+          <input id="expDetalle" type="text" maxlength="100" placeholder="Primero elige el tipo" required>
+        </div>
+
+        <div class="exp-campo">
+          <label for="expNombre">Tu nombre</label>
+          <input id="expNombre" type="text" maxlength="40" placeholder="Ej: Camila" required>
+        </div>
+
+        <button type="submit" class="btn btn-agregar-experiencia">Reservar experiencia</button>
+      </form>
+
+      <div class="rejilla" id="listaExperiencias"></div>
+      <p class="vacio vacio-exp" id="vacioExp">Aún nadie ha reservado una experiencia.</p>
+    </section>
+
+    <p class="vacio" id="vacio" hidden>No hay regalos con ese filtro. Prueba con otra categoría.</p>
+  </main>
+
+  <footer>
+    <p>Hecho con cariño para Yanis</p>
+  </footer>
+
+  <!-- Ventana para reservar -->
+  <dialog id="dialogo">
+    <form method="dialog" id="formReserva">
+      <h2 id="dialogoTitulo">Reservar regalo</h2>
+      <p id="dialogoRegalo"></p>
+      <label for="inputNombre">Tu nombre</label>
+      <input id="inputNombre" type="text" maxlength="40" placeholder="Ej: Camila" required>
+      <div class="acciones">
+        <button type="button" class="btn btn-sec" id="cancelar">Cancelar</button>
+        <button type="submit" class="btn">Reservar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js?v=4"></script>
+</body>
+</html>
